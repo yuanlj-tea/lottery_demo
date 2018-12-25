@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+	<meta content="Discover the rich set of features in CanvasFlip. Explore everything about rapid prototyping, sharing and analyzing the UX of prototypes on the tool. Know more."
+	 name="description">
+	<meta name="robots" content="index, follow">
+	<meta name="googlebot" content="index, follow">
+	<meta name="keywords" content="features,rapid prototyping,sharing,analyzing,prototypes">
+	<meta name="author" content="CANVASFLIP.COM">
+	<meta name="copyright" content="CANVASFLIP.COM">
+	<title>抽奖</title>
+	<!-- <link href="/static/index/css/layer.css" rel="stylesheet" type="text/css" /> -->
+	<link href="__h_css__/layer.css" rel="stylesheet" type="text/css" />
+	<!-- <script src="__h_js__/jquery-2.2.0.min.js" type="text/javascript"></script> -->
+	<script src="__h_js__/jquery-2.2.0.min.js" type="text/javascript"></script>
+	<style>
+		*,
+		:after,
+		:before {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		main {
+			padding-top: 3em;
+		}
+
+		table {
+			border-spacing: 0;
+			border-collapse: collapse;
+			text-align: center;
+		}
+
+		.draw {
+			width: 560px;
+			height: 600px;
+			margin: 0 auto;
+			padding: 51px;
+			background-image: url(__h_img__/bg.png);
+			background-repeat: no-repeat;
+			background-size: 100%;
+		}
+
+		.draw .item {
+			width: 150px;
+			height: 150px;
+			background-image: url(__h_img__/bg1.png);
+			background-repeat: no-repeat;
+			background-size: 96%;
+		}
+
+		.draw .item.active {
+			background-image: url(__h_img__/bg2.png);
+			background-repeat: no-repeat;
+			background-size: 100%;
+		}
+
+		.draw .img {
+			display: table-cell;
+			width: 150px;
+			height: 61px;
+			vertical-align: middle;
+			text-align: center;
+		}
+
+		.draw .img img {
+			vertical-align: top;
+		}
+
+		.draw .gap {
+			width: 5px;
+		}
+
+		.draw .gap-2 {
+			height: 5px;
+		}
+
+		.draw .name {
+			display: block;
+			margin-top: 10px;
+			font-size: 14px;
+		}
+
+		.draw .draw-btn {
+			display: block;
+			height: 150px;
+			line-height: 150px;
+			border-radius: 20px;
+			font-size: 25px;
+			font-weight: 700;
+			text-decoration: none;
+			background-image: url(__h_img__/bg3.png);
+			background-repeat: no-repeat;
+			background-size: 96%;
+		}
+	</style>
+</head>
+
+<body ng-app="mainApp" ng-controller="indexCtrl" style="background: #f02d2f;">
+	<div class="headerWrapper container-fluid">
+
+	</div>
+
+	<main style="background: #f02d2f;">
+		<div class="draw" id="lottery">
+			<table id='main'>
+				<tr>
+					<td class="item lottery-unit lottery-unit-0">
+						<div class="img">
+							<img src="__h_img__/img1.png" alt="">
+						</div>
+						<span class="name">终身VIP会员</span>
+					</td>
+					<td class="gap"></td>
+					<td class="item lottery-unit lottery-unit-1">
+						<div class="img">
+							<img src="__h_img__/img2.png" alt="">
+						</div>
+						<span class="name">三年VIP会员</span>
+					</td>
+					<td class="gap"></td>
+					<td class="item lottery-unit lottery-unit-2">
+						<div class="img">
+							<img src="__h_img__/img3.png" alt="">
+						</div>
+						<span class="name">半年VIP会员</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="gap-2" colspan="5"></td>
+				</tr>
+				<tr>
+					<td class="item lottery-unit lottery-unit-7">
+						<div class="img">
+							<img src="__h_img__/img4.png" alt="">
+						</div>
+						<span class="name">399元充值卡一张</span>
+					</td>
+					<td class="gap"></td>
+					<td class="">
+						<a class="draw-btn" id="draw-btn" href="javascript:"></a>
+					</td>
+					<td class="gap"></td>
+					<td class="item lottery-unit lottery-unit-3">
+						<div class="img">
+							<img src="__h_img__/img5.png" alt="">
+						</div>
+						<span class="name">100元充值卡一张</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="gap-2" colspan="5"></td>
+				</tr>
+				<tr>
+					<td class="item lottery-unit lottery-unit-6">
+						<div class="img">
+							<img src="__h_img__/img7.png" alt="">
+						</div>
+						<span class="name">免费体验一次</span>
+					</td>
+					<td class="gap"></td>
+					<td class="item lottery-unit lottery-unit-5">
+						<div class="img">
+							<img src="__h_img__/img6.png" alt="">
+						</div>
+						<span class="name">九折优惠券一张</span>
+					</td>
+					<td class="gap"></td>
+					<td class="item lottery-unit lottery-unit-4">
+						<div class="img">
+							<img src="__h_img__/img8.png" alt="">
+						</div>
+						<span class="name">参与大礼包一份</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+	</main>
+
+	<!--弹窗layer-->
+	<script src="__h_js__/layer-v3.1.1/layer/layer.js"></script>
+
+	<script type="text/javascript">
+
+		$(function () {
+			round = GetRequest();
+
+			$.post("{:url('/index/index/award')}", {
+			//$.post("{:url('/admin/articles/index')}", {
+				'round': round,
+
+			}, function (data) {
+				console.log(data);
+				award = data.data;
+				console.log(award);
+				if (data.code != 1) {
+					layer.open({
+						content: data.msg,
+						success: function (layero, index) {
+							//console.log(layero, index);
+						}
+					});
+				} else {
+					html = '';
+					$(data.data).each(function (i, v) {
+						var k = i + 1;
+
+						if (i <= 2) {
+							if (i == 0) {
+								html += '<tr>';
+							}
+							html += '<td class="item lottery-unit lottery-unit-' + v.unit + '">';
+							html += '<div class="img">';
+							html += '<img src="__h_img__/img' + v.prize_num + '.png" alt=""> </div>';
+							html += '<span class="name">' + v.desc + '</span></td>';
+							if (i == 0 || i == 1) {
+								html += '<td class="gap"></td>';
+							}
+							if (i == 2) {
+								html += '</tr>';
+							}
+						}
+
+						if (i == 2 || i == 5) {
+							html += '<tr><td class="gap-2" colspan="5"></td></tr>';
+						}
+
+						if (i >= 3 && i <= 4) {
+							if (i == 3) {
+								html += '<tr>';
+								html += '<td class="item lottery-unit lottery-unit-' + v.unit + '">';
+								html += '<div class="img">';
+								html += '<img src="__h_img__/img' + v.prize_num + '.png" alt=""> </div>';
+								html += '<span class="name">' + v.desc + '</span></td>';
+								html += '<td class="gap"></td>';
+							}
+							if (i == 3) {
+								html += '<td class="">';
+								html += '<a class="draw-btn" id="draw-btn" href="javascript:"></a>';
+								html += '</td>';
+								html += '<td class="gap"></td>';
+							}
+							if (i == 4) {
+								html += '<td class="item lottery-unit lottery-unit-' + v.unit + '">';
+								html += '<div class="img">';
+								html += '<img src="__h_img__/img' + v.prize_num + '.png" alt=""> </div>';
+								html += '<span class="name">' + v.desc + '</span></td>';
+								html += '</tr>';
+							}
+						}
+
+						if (i > 4) {
+							if (i == 5) {
+								html += '<tr>';
+							}
+							html += '<td class="item lottery-unit lottery-unit-' + v.unit + '">';
+							html += '<div class="img">';
+							html += '<img src="__h_img__/img' + v.prize_num + '.png" alt=""> </div>';
+							html += '<span class="name">' + v.desc + '</span></td>';
+							if (i == 5 || i == 6) {
+								html += '<td class="gap"></td>';
+							}
+							if (i == 7) {
+								html += '</tr>';
+							}
+						}
+
+					});
+					$('#main').html(html);
+				}
+			}
+			);
+
+		});
+
+
+		var lottery = {
+			index: -1, //当前转动到哪个位置，起点位置
+			count: 0, //总共有多少个位置
+			timer: 0, //setTimeout的ID，用clearTimeout清除
+			speed: 20, //初始转动速度
+			times: 0, //转动次数
+			cycle: 50, //转动基本次数：即至少需要转动多少次再进入抽奖环节
+			prize: -1, //中奖位置
+			init: function (id) {
+				if ($('#' + id).find('.lottery-unit').length > 0) {
+					$lottery = $('#' + id);
+					$units = $lottery.find('.lottery-unit');
+					this.obj = $lottery;
+					this.count = $units.length;
+					$lottery.find('.lottery-unit.lottery-unit-' + this.index).addClass('active');
+				};
+			},
+			roll: function () {
+				var index = this.index;
+				var count = this.count;
+				var lottery = this.obj;
+				$(lottery).find('.lottery-unit.lottery-unit-' + index).removeClass('active');
+				index += 1;
+				if (index > count - 1) {
+					index = 0;
+				};
+				$(lottery).find('.lottery-unit.lottery-unit-' + index).addClass('active');
+				this.index = index;
+				return false;
+			},
+			stop: function (index) {
+				this.prize = index;
+				return false;
+			}
+		};
+
+		function roll() {
+			lottery.times += 1;
+			lottery.roll(); //转动过程调用的是lottery的roll方法，这里是第一次调用初始化
+
+			if (lottery.times > lottery.cycle + 10 && lottery.prize == lottery.index) {
+				clearTimeout(lottery.timer);
+				
+				layer.open({
+					title:'中奖信息',
+					content: "<span style='height:100%'>恭喜您中奖：<br>"+prize_num+"</span>",
+					//icon:1,
+					shade:false,
+					anim:5,
+					success: function (layero, index) {
+						console.log(layero, index);
+					}
+				});
+				
+		
+
+				// layer.open({
+				// 	type: 1,
+				// 	shadeClose: true,
+				// 	shade: false,
+				// 	maxmin: true, //开启最大化最小化按钮
+				// 	//area: ['200px', '200px'],
+				// 	area:auto,
+				// 	//content: $("#info").html()
+				// 	content:'<a href=""><img src="__h_img__/img'+prize_num+'.png"></a>'
+				// });
+
+				lottery.prize = -1;
+				lottery.times = 0;
+				click = false;
+			} else {
+				if (lottery.times < lottery.cycle) {
+					lottery.speed -= 10;
+				} else if (lottery.times == lottery.cycle) {
+					//var index = Math.random() * (lottery.count) | 0; //静态演示，随机产生一个奖品序号，实际需请求接口产生
+					//console.log(index);
+
+					$.post("{:url('/index/index/lottery')}", {
+						'round': round,
+
+					}, function (data) {
+						if (data.code != 1) {
+							console.log('调取接口错误');
+							return;
+						} else {
+							console.log(data.data);
+							index = data.data;
+							lottery.prize = index;
+							prize_num=data.msg;
+						}
+
+					}
+					);
+
+				} else {
+					if (lottery.times > lottery.cycle + 10 && ((lottery.prize == 0 && lottery.index == 7) || lottery.prize == lottery.index + 1)) {
+						lottery.speed += 110;
+					} else {
+						lottery.speed += 20;
+					}
+				}
+				if (lottery.speed < 40) {
+					lottery.speed = 40;
+				};
+				lottery.timer = setTimeout(roll, lottery.speed); //循环调用
+			}
+			return false;
+		}
+
+		var click = false;
+
+		window.onload = function () {
+			lottery.init('lottery');
+
+			$('#draw-btn').click(function () {
+				
+				if (click) { //click控制一次抽奖过程中不能重复点击抽奖按钮，后面的点击不响应
+					return false;
+
+				} else {
+					lottery.speed = 100;
+					roll(); //转圈过程不响应click事件，会将click置为false
+					click = true; //一次抽奖完成后，设置click为true，可继续抽奖		
+					return false;
+				}
+			});
+			$('body').on('click', '#draw-btn', function () {
+				console.log(award);
+				if (click) {
+					return false;
+				} else {
+					lottery.speed = 100;
+					roll();
+					click = true;
+					return false;
+				}
+			});
+		};
+
+
+		function GetRequest() {
+			var url = location.search; //获取url中"?"符后的字串
+
+			if (url.indexOf("?") != -1) {    //判断是否有参数
+				var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+				strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+				return strs[1];          //直接弹出第一个参数 (如果有多个参数 还要进行循环的)
+			} else {
+				return 1;
+			}
+		}
+	</script>
+</body>
+
+<div id='info' style="display : none">
+	<a href="">
+		<img src="__h_img__/tk_img.png">
+	</a>
+	<!-- <h1>2000元</h1> -->
+</div>
+
+</html>

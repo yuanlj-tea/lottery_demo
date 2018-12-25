@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>后台登录</title>
+    <meta name="author" content="DeathGhost" />
+    <link rel="stylesheet" type="text/css" href="__CSS__/style.css" tppabs="__CSS__/style.css" />
+    <style>
+        body {
+            height: 100%;
+            background: #16a085;
+            overflow: hidden;
+        }
+
+        canvas {
+            z-index: -1;
+            position: absolute;
+        }
+    </style>
+    <script src="__JS__/login/jquery.js"></script>
+    <script src="__JS__/login/verificationNumbers.js" tppabs="js/verificationNumbers.js"></script>
+    <script src="__JS__/login/Particleground.js" tppabs="js/Particleground.js"></script>
+    <script>
+        $(document).ready(function () {
+            //粒子背景特效
+            $('body').particleground({
+                dotColor: '#5cbdaa',
+                lineColor: '#5cbdaa'
+            });
+            //验证码
+            createCode();
+            //测试提交，对接程序删除即可
+            $(".submit_btn").click(function () {
+                location.href = "javascrpt:;" /*tpa=http://***index.html*/;
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <dl class="admin_login">
+        <dt>
+            <strong>站点后台管理系统</strong>
+            <em>Management System</em>
+        </dt>
+        <dd class="user_icon">
+            <input type="text" placeholder="账号" class="login_txtbx" id='user_name' />
+            <span id='user_name_err'></span>
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" placeholder="密码" class="login_txtbx" id='password' />
+            <span id='pwd_err'></span>
+        </dd>
+        <dd class="val_icon">
+            <div class="checkcode">
+                <input type="text" name='code' id="code" placeholder="验证码" maxlength="4" class="login_txtbx">
+                <img id='captcha' src="{:url('checkVerify')}" onclick="javascript:this.src='{:url('checkVerify')}?tm='+Math.random();" style="float:right;cursor: pointer" />
+                <!-- <canvas class="J_codeimg" id="myCanvas" onclick="createCode()" style='display:none'>对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas> -->
+            </div>
+            
+        </dd>
+        <dd>
+            <input type="button" value="立即登陆" class="submit_btn" id='login_btn'/>
+        </dd>
+        <dd>
+            <p id='err_msg'></p>
+        </dd>
+    </dl>
+    <script type='text/javascript'>
+        document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==13){
+                $('#login_btn').click();
+            }
+        }
+
+        var lock=false;
+        $(function(){
+            $('#login_btn').click(function(){
+                if(lock){
+                    return;
+                }
+                lock=true;
+                $('#err_msg').hide();
+
+                var username = $('#user_name').val();
+                var password = $('#password').val();
+                var code = $('#code').val();
+                $.post("{:url('login/doLogin')}",{
+                    'user_name': username,
+                    'password': password,
+                    'code': code
+                },  function(data){
+                        lock=false;
+                        if(data.code!=1){
+                            $('#err_msg').show().html("<span style='color:red'>"+data.msg+"</span>");
+                            return;
+                        }else{
+                            window.location.href=data.data;
+                        }
+
+                    }
+                );
+            });
+        });
+
+        $('#user_name').blur(function(){
+            var user_name=$('#user_name').val();
+            if(!user_name && user_name==''){
+                $('#user_name_err').html('请输入用户名');
+            }
+        });
+        $('#user_name').focus(function(){
+            $('#user_name_err').html('');
+        });
+
+        $('#password').blur(function(){
+            var user_name=$('#password').val();
+            if(!user_name && user_name==''){
+                $('#pwd_err').html('请输入密码');
+            }
+        });
+        $('#password').focus(function(){
+            $('#pwd_err').html('');
+        });
+    </script>
+</body>
+
+</html>
